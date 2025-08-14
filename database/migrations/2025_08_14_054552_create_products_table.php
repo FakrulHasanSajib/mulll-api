@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+          Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->longText('description')->nullable();
+            $table->decimal('price', 8, 2);
+            $table->integer('stock')->default(0);
+            $table->foreignId('vendor_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
